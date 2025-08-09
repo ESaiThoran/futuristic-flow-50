@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import avatar from '@/assets/avatar-portrait.jpg';
+import { LampContainer } from '@/components/ui/lamp';
 
 const About = () => {
   const x = useMotionValue(0);
@@ -32,7 +33,11 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        <div>
+        <div className="relative">
+          <div className="pointer-events-none absolute right-0 -top-48 w-full max-w-[28rem]">
+            <LampContainer className="!min-h-0 h-56 rounded-full opacity-70" />
+          </div>
+
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}

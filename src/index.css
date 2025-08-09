@@ -147,3 +147,40 @@
   }
   .magnetic-btn:hover::after { opacity: 1; }
 }
+
+/* Custom animations and components for hero interactions */
+@layer utilities {
+  .wave-hand { display: inline-block; transform-origin: 70% 70%; animation: wave-with-pause 3s ease-in-out infinite; }
+  @keyframes wave-with-pause {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(0deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(0deg); }
+    50% { transform: rotate(14deg); }
+    60% { transform: rotate(0deg); }
+    66% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  .type-caret { border-right: 2px solid hsl(var(--accent)); animation: caret-blink 1s step-end infinite; }
+  @keyframes caret-blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: hsl(var(--accent)); }
+  }
+}
+
+@layer components {
+  .btn-flowing {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-md text-sm font-medium;
+    color: hsl(var(--primary-foreground));
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--ring)), hsl(var(--accent)));
+    background-size: 200% 200%;
+    background-position: 100% 0%;
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 10px 30px -10px hsl(var(--glow) / 0.35);
+    transition: background-position 0.35s ease, transform 0.2s ease;
+  }
+  .btn-flowing:hover { background-position: 0% 100%; transform: translateY(-1px); }
+}
+

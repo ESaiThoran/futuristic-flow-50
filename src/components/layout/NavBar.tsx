@@ -3,8 +3,8 @@ import MagneticButton from '@/components/ui/MagneticButton';
 const NavBar = () => {
   return (
     <nav className="fixed top-0 inset-x-0 z-50">
-      <div className="container flex items-center justify-between gap-4 py-4">
-        <a href="#home" className="font-display text-lg text-gradient">Teach me - I remember, Involve me - I learn</a>
+      <div className="container flex items-center justify-end gap-4 py-4">
+        
         <div className="glass rounded-full px-3 py-1.5 hidden md:flex items-center gap-2">
           <a href="#about" className="story-link px-3 py-1 text-sm">About</a>
           <a href="#skills" className="story-link px-3 py-1 text-sm">Skills</a>

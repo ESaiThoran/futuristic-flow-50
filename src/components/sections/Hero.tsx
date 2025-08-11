@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import HeroCanvas from '@/components/3d/HeroCanvas';
-import { Button } from '@/components/ui/button';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const Hero = () => {
   // Typing effect for roles
@@ -39,7 +39,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <HeroCanvas />
       </div>
-      <div className="relative z-10 container mx-auto h-full flex items-center">
+      <div className="relative z-10 container mx-auto h-full flex items-center justify-start">
         <div className="max-w-3xl">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -91,30 +91,16 @@ const Hero = () => {
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-              <Button aria-label="LinkedIn" size="lg" className="btn-flowing">
-                LinkedIn
-              </Button>
+              <GradientButton aria-label="LinkedIn">LinkedIn</GradientButton>
             </a>
             <a href="https://github.com" target="_blank" rel="noreferrer">
-              <Button aria-label="GitHub" size="lg" className="btn-flowing">
-                GitHub
-              </Button>
+              <GradientButton aria-label="GitHub" variant="variant">GitHub</GradientButton>
             </a>
             <a href="#" target="_blank" rel="noreferrer">
-              <Button aria-label="Resume" size="lg" className="btn-flowing">
-                Resume
-              </Button>
+              <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
             </a>
           </motion.div>
 
-          <div className="mt-6 group relative w-full max-w-md">
-            <div className="glass rounded-lg px-4 py-3 relative overflow-hidden">
-              <div className="absolute inset-0 bg-background/60 transition-opacity duration-300 ease-out group-hover:opacity-0" />
-              <p className="relative z-10 font-mono text-sm transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100 select-all">
-                saithoran@example.com
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </header>

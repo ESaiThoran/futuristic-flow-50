@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import avatar from '@/assets/avatar-portrait.jpg';
 import { LampContainer } from '@/components/ui/lamp';
+import { PixelCanvas } from '@/components/ui/pixel-canvas';
 
 const About = () => {
   const x = useMotionValue(0);
@@ -16,6 +17,7 @@ const About = () => {
       </div>
 
       <div className="container grid md:grid-cols-2 gap-10 items-center">
+        {/* Left: Interactive avatar */}
         <motion.div
           className="relative"
           onMouseMove={(e) => {
@@ -33,6 +35,7 @@ const About = () => {
           </motion.div>
         </motion.div>
 
+        {/* Right: Heading, description, lamp and single education card */}
         <div className="relative">
           <div className="pointer-events-none absolute right-0 -top-48 w-full max-w-[28rem]">
             <LampContainer className="!min-h-0 h-56 rounded-full opacity-70" />
@@ -56,17 +59,34 @@ const About = () => {
           >
             I specialize in crafting premium, interactive web experiences that feel fast and alive. From 3D scenes to refined UI systems, I blend aesthetics with performance to deliver delightful products.
           </motion.p>
+
+          {/* Single education card with always-on PixelCanvas effect */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted-foreground"
+            className="mt-6"
           >
-            <div className="glass rounded-lg p-4">+ 5yrs Experience</div>
-            <div className="glass rounded-lg p-4">3D & Motion</div>
-            <div className="glass rounded-lg p-4">Performance First</div>
-            <div className="glass rounded-lg p-4">Beautiful UI</div>
+            <div
+              className="group relative overflow-hidden border border-border rounded-2xl p-6 md:p-8 bg-card/60 backdrop-blur-sm"
+              style={{ ['--active-color' as any]: '#0ea5e9' }}
+            >
+              <PixelCanvas
+                gap={10}
+                speed={25}
+                colors={["#e0f2fe", "#7dd3fc", "#0ea5e9"]}
+                variant="icon"
+                noFocus
+                autoplay
+              />
+              <div className="relative z-10 space-y-2">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Education</p>
+                <h3 className="text-lg md:text-xl font-semibold">B.Tech in Computer Science and Engineering w/s in Cyber Security</h3>
+                <p className="text-muted-foreground">S.R.M University</p>
+                <p className="text-muted-foreground">2021 - 2025</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

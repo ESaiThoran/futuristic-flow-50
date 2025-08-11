@@ -39,16 +39,8 @@ const Hero = () => {
       <div className="absolute inset-0">
         <HeroCanvas />
       </div>
-      <div className="relative z-10 container mx-auto h-full flex items-center justify-start">
+      <div className="relative z-10 container mx-auto h-full flex items-start justify-start pt-48">
         <div className="max-w-3xl">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-sm tracking-wide text-muted-foreground mb-4 italic"
-          >
-            Teach me - I remember, Involve me - I learn
-          </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 14 }}

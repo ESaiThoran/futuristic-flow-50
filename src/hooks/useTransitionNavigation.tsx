@@ -15,7 +15,7 @@ export const useTransitionNavigation = () => {
 
   const goBackWithTransition = async () => {
     await startTransition('down');
-    navigate('/');
+    navigate(-1);
   };
 
   return {

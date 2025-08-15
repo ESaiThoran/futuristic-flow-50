@@ -24,15 +24,12 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
     setTransitionDirection(direction);
     setIsTransitioning(true);
     
-    // Return a promise that resolves after the glassmorphism overlay appears
+    // Return a promise that resolves after the transition is complete
     return new Promise<void>((resolve) => {
       setTimeout(() => {
+        setIsTransitioning(false);
         resolve();
-        // Keep transition state for overlay timing
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 600); // Overlay duration
-      }, 100); // Small delay before navigation
+      }, 1200); // Total transition time
     });
   }, []);
 

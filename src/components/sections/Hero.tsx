@@ -133,13 +133,6 @@ const Hero = () => {
             <a href="#" target="_blank" rel="noreferrer">
               <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
             </a>
-            <GradientButton 
-              onClick={() => navigateWithTransition('/my-works')}
-              aria-label="View My Works"
-              variant="cyan"
-            >
-              Checkout My Works
-            </GradientButton>
           </motion.div>
 
         </div>

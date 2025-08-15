@@ -3,12 +3,10 @@ import { motion } from 'framer-motion';
 import HeroCanvas from '@/components/3d/HeroCanvas';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { CircularTestimonials } from '@/components/ui/circular-testimonials';
+import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
 
-interface HeroProps {
-  onShowMyWorks: (tab?: string, videoId?: number) => void;
-}
-
-const Hero = ({ onShowMyWorks }: HeroProps) => {
+const Hero = () => {
+  const { navigateWithTransition } = useTransitionNavigation();
   
   // Typing effect for roles
   const roles = ['Cyber-Security', 'Ui/UX Designer', 'Frontend developer'];

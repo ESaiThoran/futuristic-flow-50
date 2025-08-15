@@ -19,6 +19,7 @@ const gradientButtonVariants = cva(
         default: "",
         variant: "gradient-button-variant",
         emerald: "gradient-button-emerald",
+        cyan: "gradient-button-cyan",
       },
     },
     defaultVariants: {

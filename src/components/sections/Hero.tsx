@@ -3,8 +3,11 @@ import { motion } from 'framer-motion';
 import HeroCanvas from '@/components/3d/HeroCanvas';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { CircularTestimonials } from '@/components/ui/circular-testimonials';
+import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
 
 const Hero = () => {
+  const { navigateWithTransition } = useTransitionNavigation();
+  
   // Typing effect for roles
   const roles = ['Cyber-Security', 'Ui/UX Designer', 'Frontend developer'];
   const [text, setText] = useState('');
@@ -130,6 +133,13 @@ const Hero = () => {
             <a href="#" target="_blank" rel="noreferrer">
               <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
             </a>
+            <GradientButton 
+              onClick={() => navigateWithTransition('/my-works')}
+              aria-label="View My Works"
+              variant="cyan"
+            >
+              Checkout My Works
+            </GradientButton>
           </motion.div>
 
         </div>

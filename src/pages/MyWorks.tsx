@@ -1,9 +1,13 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { PageWrapper, StaggeredContent } from '@/components/ui/page-wrapper';
+import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
 
 const MyWorks = () => {
   const navigate = useNavigate();
+  const { goBackWithTransition } = useTransitionNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState('works');
 
@@ -33,8 +37,7 @@ const MyWorks = () => {
   };
 
   const handleBack = () => {
-    // Navigate back to the previous page
-    navigate(-1);
+    goBackWithTransition();
   };
 
   const worksData = [
@@ -105,88 +108,8 @@ const MyWorks = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-accent/30 selection:text-primary">
-      <main className="container pt-16 pb-16">
-        <div className="flex items-center justify-center mb-8">
-          <h1 className="font-display text-3xl md:text-4xl">My Works</h1>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="fixed top-6 right-6 z-50 flex space-x-1 bg-black/80 backdrop-blur-sm p-1 rounded-lg shadow-lg border-2 border-white">
-            <button
-              onClick={() => handleTabChange('works')}
-              className={`px-6 py-2 rounded-md transition-all duration-200 border ${
-                activeTab === 'works'
-                  ? 'bg-white text-black border-white'
-                  : 'bg-transparent text-white border-transparent hover:bg-white hover:text-black hover:border-white'
-              }`}
-            >
-              My Works
-            </button>
-            <button
-              onClick={() => handleTabChange('videos')}
-              className={`px-6 py-2 rounded-md transition-all duration-200 border ${
-                activeTab === 'videos'
-                  ? 'bg-white text-black border-white'
-                  : 'bg-transparent text-white border-transparent hover:bg-white hover:text-black hover:border-white'
-              }`}
-            >
-              Project Videos
-            </button>
-          </div>
-        </div>
-
-        {/* Tab Content */}
-        {activeTab === 'works' && (
-          <div className="space-y-8">
-            {worksData.map((work) => (
-              <div key={work.id} className="rounded-xl overflow-hidden border border-border bg-card/60">
-                <div className="aspect-video w-full bg-gradient-to-br from-zinc-800 to-zinc-700 flex items-center justify-center text-muted-foreground">
-                  <img src={work.image} alt={work.title} className="w-full h-full object-cover" />
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
-                      {work.category}
-                    </span>
-                  </div>
-                  <h2 className="font-semibold text-lg">{work.title}</h2>
-                  <p className="text-sm text-muted-foreground">{work.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {activeTab === 'videos' && (
-          <div className="space-y-8">
-            {videoData.map((video) => (
-              <div id={`video-${video.id}`} key={video.id} className="rounded-xl overflow-hidden border border-border bg-card/60">
-                <div className="relative aspect-video w-full bg-gradient-to-br from-zinc-800 to-zinc-700">
-                  <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                    {video.duration}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h2 className="font-semibold text-lg">{video.title}</h2>
-                  <p className="text-sm text-muted-foreground">{video.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
-
-      {/* Fixed Back Button */}
+    <PageWrapper className="bg-background text-foreground selection:bg-accent/30 selection:text-primary">
+      {/* Fixed Back Button - No animation */}
       <button 
         onClick={handleBack} 
         className="fixed top-6 left-6 z-50 px-4 py-2 rounded-lg border-2 border-white bg-black/80 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2"
@@ -194,7 +117,124 @@ const MyWorks = () => {
         <IoArrowBack className="text-lg" />
         Back
       </button>
-    </div>
+
+      {/* Fixed Tab Navigation - No animation */}
+      <div className="fixed top-6 right-6 z-50 flex space-x-1 bg-black/80 backdrop-blur-sm p-1 rounded-lg shadow-lg border-2 border-white">
+        <button
+          onClick={() => handleTabChange('works')}
+          className={`px-6 py-2 rounded-md transition-all duration-200 border ${
+            activeTab === 'works'
+              ? 'bg-white text-black border-white'
+              : 'bg-transparent text-white border-transparent hover:bg-white hover:text-black hover:border-white'
+          }`}
+        >
+          My Works
+        </button>
+        <button
+          onClick={() => handleTabChange('videos')}
+          className={`px-6 py-2 rounded-md transition-all duration-200 border ${
+            activeTab === 'videos'
+              ? 'bg-white text-black border-white'
+              : 'bg-transparent text-white border-transparent hover:bg-white hover:text-black hover:border-white'
+          }`}
+        >
+          Project Videos
+        </button>
+      </div>
+
+      <main className="container pt-16 pb-16">
+        <StaggeredContent className="flex items-center justify-center mb-8">
+          <h1 className="font-display text-3xl md:text-4xl">My Works</h1>
+        </StaggeredContent>
+
+        {/* Animated Tab Content */}
+        <StaggeredContent delay={1.1}>
+          <AnimatePresence mode="wait">
+            {activeTab === 'works' && (
+              <motion.div
+                key="works"
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="space-y-8"
+              >
+                {worksData.map((work, index) => (
+                  <motion.div
+                    key={work.id}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    className="rounded-xl overflow-hidden border border-border bg-card/60"
+                  >
+                    <div className="aspect-video w-full bg-gradient-to-br from-zinc-800 to-zinc-700 flex items-center justify-center text-muted-foreground">
+                      <img src={work.image} alt={work.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
+                          {work.category}
+                        </span>
+                      </div>
+                      <h2 className="font-semibold text-lg">{work.title}</h2>
+                      <p className="text-sm text-muted-foreground">{work.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === 'videos' && (
+              <motion.div
+                key="videos"
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 100, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="space-y-8"
+              >
+                {videoData.map((video, index) => (
+                  <motion.div
+                    id={`video-${video.id}`}
+                    key={video.id}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    className="rounded-xl overflow-hidden border border-border bg-card/60"
+                  >
+                    <div className="relative aspect-video w-full bg-gradient-to-br from-zinc-800 to-zinc-700">
+                      <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                          <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        {video.duration}
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h2 className="font-semibold text-lg">{video.title}</h2>
+                      <p className="text-sm text-muted-foreground">{video.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </StaggeredContent>
+      </main>
+    </PageWrapper>
   );
 };
 

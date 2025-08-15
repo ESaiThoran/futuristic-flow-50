@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
 import Timeline from '@/components/ui/timeline';
-import { useRef, useState, useEffect } from 'react';
 import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
 import aijImage from '@/assets/aij.jpeg';
 import pdtImage from '@/assets/pdt.jpeg';
 import cstImage from '@/assets/cst.jpg';
 import hciImage from '@/assets/hci.png';
 import rmsImage from '@/assets/rms.jpg';
-const Projects = () => {
-  const { navigateWithTransition } = useTransitionNavigation();
+interface ProjectsProps {
+  onShowMyWorks: (tab?: string, videoId?: number) => void;
+}
+
+const Projects = ({ onShowMyWorks }: ProjectsProps) => {
 
   const handleImageClick = (projectTitle: string) => {
     // Map projects to corresponding video IDs
@@ -22,9 +24,9 @@ const Projects = () => {
 
     const videoId = projectTitleToVideoId[projectTitle];
     if (videoId) {
-      navigateWithTransition(`/my-works?tab=videos&videoId=${videoId}`);
+      onShowMyWorks('videos', videoId);
     } else {
-      navigateWithTransition('/my-works?tab=videos');
+      onShowMyWorks('videos');
     }
   };
 

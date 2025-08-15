@@ -2,6 +2,10 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button as RainbowButton } from '@/components/ui/rainbow-borders-button';
 
+interface MyExperienceProps {
+  onShowMyWorks: (tab?: string, videoId?: number) => void;
+}
+
 const LampContainer = ({
 	children,
 	className,
@@ -83,7 +87,7 @@ const LampContainer = ({
 	);
 };
 
-const MyExperience = () => {
+const MyExperience = ({ onShowMyWorks }: MyExperienceProps) => {
 	return (
 		<section id="experience" className="relative py-24">
 			<div className="container">
@@ -105,7 +109,7 @@ const MyExperience = () => {
 			</div>
 			{/* Bottom-left button anchored to the entire section */}
 			<div className="absolute bottom-6 left-40 z-10">
-				<RainbowButton wrapperClassName="py-0 justify-start" />
+				<RainbowButton wrapperClassName="py-0 justify-start" onShowMyWorks={onShowMyWorks} />
 			</div>
 		</section>
 	);

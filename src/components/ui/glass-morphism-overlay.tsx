@@ -14,7 +14,7 @@ const GlassMorphismOverlay = ({ isVisible, onComplete }: GlassMorphismOverlayPro
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           transition={{ 
-            duration: 0.5, // Reduced from 0.6 to match other transitions
+            duration: 0.4, // Further reduced for smoother experience
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
           onAnimationComplete={(definition) => {
@@ -24,7 +24,7 @@ const GlassMorphismOverlay = ({ isVisible, onComplete }: GlassMorphismOverlayPro
               onComplete();
             }
           }}
-          className="fixed inset-0 z-40 glass-morphism-overlay"
+          className="fixed inset-0 z-40 glass-morphism-overlay will-change-transform"
           style={{
             background: `
               linear-gradient(135deg, 

@@ -180,8 +180,8 @@ const MyWorksInline = ({
             opacity: contentVisible ? 1 : 0 
           }}
           transition={{ 
-            duration: 0.5,
-            delay: contentVisible ? 0.1 : 0, // Reduced from 0.2 to make it snappier
+            duration: 0.4,
+            delay: contentVisible ? 0.1 : 0,
             ease: [0.25, 0.46, 0.45, 0.94] 
           }}
           onClick={onClose}
@@ -199,8 +199,8 @@ const MyWorksInline = ({
             opacity: contentVisible ? 1 : 0 
           }}
           transition={{ 
-            duration: 0.5,
-            delay: contentVisible ? 0.2 : 0, // Reduced from 0.3 to make it snappier
+            duration: 0.4,
+            delay: contentVisible ? 0.2 : 0,
             ease: [0.25, 0.46, 0.45, 0.94] 
           }}
           className="fixed top-6 right-6 z-50"
@@ -232,7 +232,7 @@ const MyWorksInline = ({
         </motion.div>
 
         <main className="container pb-16 pt-20">
-          {/* Heading - Fade in at place */}
+          {/* Heading - Animated based on tab changes */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ 
@@ -246,21 +246,33 @@ const MyWorksInline = ({
             }}
             className="flex items-center justify-center mb-12"
           >
-            <h1 className="font-display text-4xl md:text-5xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              {activeTab === 'works' ? 'My Works' : 'Project Works'}
-            </h1>
+            <AnimatePresence mode="wait">
+              <motion.h1 
+                key={activeTab}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ 
+                  duration: 0.3, 
+                  ease: [0.25, 0.46, 0.45, 0.94] 
+                }}
+                className="font-display text-4xl md:text-5xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+              >
+                {activeTab === 'works' ? 'My Works' : 'Project Works'}
+              </motion.h1>
+            </AnimatePresence>
           </motion.div>
 
           {/* Tab Content Container - Cards slide from bottom */}
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: 50, opacity: 0 }}
             animate={{ 
-              y: contentVisible ? 0 : 100, 
+              y: contentVisible ? 0 : 50, 
               opacity: contentVisible ? 1 : 0 
             }}
             transition={{ 
-              duration: 0.6, 
-              delay: contentVisible ? 0.4 : 0,
+              duration: 0.5, 
+              delay: contentVisible ? 0.3 : 0,
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
             className="relative overflow-hidden"

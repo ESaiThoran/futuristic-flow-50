@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 const NavBar = () => {
   return (
-    <nav className="fixed top-0 inset-x-0 z-30">
-      <div className="container flex items-center justify-center py-4 will-change-transform transform-gpu">
+    <nav className="fixed top-0 inset-x-0 z-30" style={{ transform: 'translateZ(0)' }}>
+      <div className="container flex items-center justify-center py-4" style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}>
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}

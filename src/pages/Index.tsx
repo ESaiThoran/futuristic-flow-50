@@ -37,6 +37,8 @@ const Index = () => {
   // Cleanup body scroll lock and padding on component unmount
   useEffect(() => {
     return () => {
+      document.documentElement.style.overflow = 'unset';
+      document.documentElement.style.paddingRight = '0px';
       document.body.style.overflow = 'unset';
       document.body.style.paddingRight = '0px';
     };
@@ -49,6 +51,10 @@ const Index = () => {
     // Prevent body scroll when My Works section is active
     // Add padding to prevent layout shift when scrollbar disappears
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    
+    // Apply styles to html element as well to prevent any jerking
+    document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.body.style.overflow = 'hidden';
     
@@ -81,6 +87,8 @@ const Index = () => {
         setOverlayVisible(false);
         setTransitionPhase('idle');
         // Restore body scroll and reset padding when My Works section is closed
+        document.documentElement.style.overflow = 'unset';
+        document.documentElement.style.paddingRight = '0px';
         document.body.style.overflow = 'unset';
         document.body.style.paddingRight = '0px';
       }, 500); // Reduced from 600 to match other transitions

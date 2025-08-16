@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
+import { useMyWorks } from '@/pages/Index';
 
 const Hero = () => {
   const { navigateWithTransition } = useTransitionNavigation();
+  const { showMyWorks } = useMyWorks();
   
   // Typing effect for roles
   const roles = ['Cyber-Security', 'Ui/UX Designer', 'Frontend developer'];
@@ -107,6 +109,9 @@ const Hero = () => {
             <a href="#" target="_blank" rel="noreferrer">
               <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
             </a>
+            <button onClick={() => showMyWorks('works')}>
+              <GradientButton aria-label="My Works" variant="cyan">My Works</GradientButton>
+            </button>
           </motion.div>
 
         </div>

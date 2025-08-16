@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Button as RainbowButton } from '@/components/ui/rainbow-borders-button';
 import { CircularTestimonials } from '@/components/ui/circular-testimonials';
 
 const MyExperience = () => {
@@ -90,18 +89,6 @@ const MyExperience = () => {
 						/>
 					</motion.div>
 
-					{/* Checkout My Works Button */}
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.6, delay: 0.8, ease: 'easeOut' }}
-						className="absolute -bottom-14 left-4"
-					>
-						<div className="w-40">
-							<RainbowButton wrapperClassName="py-0 justify-center w-full" />
-						</div>
-					</motion.div>
 				</div>
 			</div>
 			</div>

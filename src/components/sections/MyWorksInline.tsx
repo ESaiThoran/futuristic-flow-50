@@ -214,21 +214,35 @@ const MyWorksInline = ({
                   ? 'bg-white text-black border-white shadow-lg'
                   : 'bg-transparent text-white border-transparent hover:bg-white/10 hover:border-white/20'
               }`}
-            >
+          key={`heading-${activeTab}`}
+          initial={{ opacity: 0, y: -20 }}
               My Works
-            </button>
-            <button
+            opacity: contentVisible ? 1 : 0, 
+            y: contentVisible ? 0 : -20 
               onClick={() => handleTabChange('videos')}
+          exit={{ opacity: 0, y: 20 }}
               disabled={isTabTransitioning}
-              className={`px-6 py-2 rounded-md transition-all duration-200 border disabled:opacity-50 ${
+            duration: 0.4, 
                 activeTab === 'videos'
                   ? 'bg-white text-black border-white shadow-lg'
                   : 'bg-transparent text-white border-transparent hover:bg-white/10 hover:border-white/20'
               }`}
             >
-              Project Videos
-            </button>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ 
+                duration: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              className="font-display text-4xl md:text-5xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            >
+              {activeTab === 'works' ? 'My Works' : 'Project Works'}
+            </motion.h1>
+          </AnimatePresence>
         </motion.div>
 
         <main className="container pb-16 pt-20">

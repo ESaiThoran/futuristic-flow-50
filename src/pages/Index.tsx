@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect, useCallback, useMemo } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 import NavBar from '@/components/layout/NavBar';
 import Hero from '@/components/sections/Hero';
 import MyExperience from '@/components/sections/MyExperience';
@@ -37,32 +37,25 @@ const Index = () => {
   // Cleanup body scroll lock and padding on component unmount
   useEffect(() => {
     return () => {
-      document.documentElement.style.overflow = 'unset';
-      document.documentElement.style.paddingRight = '0px';
       document.body.style.overflow = 'unset';
       document.body.style.paddingRight = '0px';
     };
   }, []);
 
-  const showMyWorks = useCallback((tab: 'works' | 'videos' = 'works', videoId?: number) => {
-    // Prevent body scroll when My Works section is active IMMEDIATELY
-    // Add padding to prevent layout shift when scrollbar disappears
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    
-    // Apply styles immediately before any state changes to prevent jerking
-    requestAnimationFrame(() => {
-      document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.style.overflow = 'hidden';
-    });
-    
-    // Set state after styles are applied
+  const showMyWorks = (tab: 'works' | 'videos' = 'works', videoId?: number) => {
     setMyWorksTab(tab);
     setMyWorksVideoId(videoId);
+    
+    // Prevent body scroll when My Works section is active
+    // Add padding to prevent layout shift when scrollbar disappears
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = 'hidden';
+    
+    // Start the transition sequence
     setTransitionPhase('overlay');
     setOverlayVisible(true);
-  }, []);
+  };
 
   const handleOverlayComplete = () => {
     // After overlay completes, show the MyWorks component and start content transition
@@ -75,10 +68,7 @@ const Index = () => {
     // after overlay completes
   };
 
-  const hideMyWorks = useCallback(() => {
-    // Prevent multiple calls if already closing
-    if (transitionPhase === 'closing') return;
-    
+  const hideMyWorks = () => {
     setTransitionPhase('closing');
     
     // Start closing sequence - content slides down first
@@ -91,19 +81,15 @@ const Index = () => {
         setOverlayVisible(false);
         setTransitionPhase('idle');
         // Restore body scroll and reset padding when My Works section is closed
-        requestAnimationFrame(() => {
-          document.documentElement.style.overflow = 'unset';
-          document.documentElement.style.paddingRight = '0px';
-          document.body.style.overflow = 'unset';
-          document.body.style.paddingRight = '0px';
-        });
+        document.body.style.overflow = 'unset';
+        document.body.style.paddingRight = '0px';
       }, 500); // Reduced from 600 to match other transitions
     }, 200); // Reduced from 300 for snappier response
-  }, [transitionPhase]);
+  };
 
-  const contextValue = useMemo(() => ({
+  const contextValue = {
     showMyWorks
-  }), [showMyWorks]);
+  };
 
   return (
     <MyWorksContext.Provider value={contextValue}>

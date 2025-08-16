@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect } from 'react';
+import { useState, createContext, useContext, useEffect, useCallback, useMemo } from 'react';
 import NavBar from '@/components/layout/NavBar';
 import Hero from '@/components/sections/Hero';
 import MyExperience from '@/components/sections/MyExperience';
@@ -44,7 +44,7 @@ const Index = () => {
     };
   }, []);
 
-  const showMyWorks = (tab: 'works' | 'videos' = 'works', videoId?: number) => {
+  const showMyWorks = useCallback((tab: 'works' | 'videos' = 'works', videoId?: number) => {
     setMyWorksTab(tab);
     setMyWorksVideoId(videoId);
     
@@ -61,7 +61,7 @@ const Index = () => {
     // Start the transition sequence
     setTransitionPhase('overlay');
     setOverlayVisible(true);
-  };
+  }, []);
 
   const handleOverlayComplete = () => {
     // After overlay completes, show the MyWorks component and start content transition
@@ -95,9 +95,9 @@ const Index = () => {
     }, 200); // Reduced from 300 for snappier response
   };
 
-  const contextValue = {
+  const contextValue = useMemo(() => ({
     showMyWorks
-  };
+  }), [showMyWorks]);
 
   return (
     <MyWorksContext.Provider value={contextValue}>

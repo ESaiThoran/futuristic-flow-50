@@ -17,9 +17,10 @@ const GlassMorphismOverlay = ({ isVisible, onComplete }: GlassMorphismOverlayPro
             duration: 0.5, // Reduced from 0.6 to match other transitions
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
-          onAnimationComplete={() => {
+          onAnimationComplete={(definition) => {
             // Call onComplete when the overlay finishes sliding up
-            if (onComplete) {
+            // Only trigger when sliding up (y becomes 0), not when sliding down
+            if (definition.y === 0 && onComplete) {
               onComplete();
             }
           }}

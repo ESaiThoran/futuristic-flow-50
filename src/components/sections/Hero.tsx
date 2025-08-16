@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { useTransitionNavigation } from '@/hooks/useTransitionNavigation';
-import { Button as RainbowButton } from '@/components/ui/rainbow-borders-button';
 
 const Hero = () => {
   const { navigateWithTransition } = useTransitionNavigation();
@@ -93,34 +92,22 @@ const Hero = () => {
             <span className="inline-block w-0.5 h-6 bg-current ml-1 animate-pulse" aria-hidden />
           </motion.p>
 
-          <div className="mt-8 flex justify-between items-center w-full max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.65, ease: 'easeOut' }}
-              className="flex flex-wrap items-center gap-3"
-            >
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-                <GradientButton aria-label="LinkedIn">LinkedIn</GradientButton>
-              </a>
-              <a href="https://github.com" target="_blank" rel="noreferrer">
-                <GradientButton aria-label="GitHub" variant="variant">GitHub</GradientButton>
-              </a>
-              <a href="#" target="_blank" rel="noreferrer">
-                <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
-              </a>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.85, ease: 'easeOut' }}
-            >
-              <div className="w-40">
-                <RainbowButton wrapperClassName="py-0 justify-center w-full" />
-              </div>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.65, ease: 'easeOut' }}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <GradientButton aria-label="LinkedIn">LinkedIn</GradientButton>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noreferrer">
+              <GradientButton aria-label="GitHub" variant="variant">GitHub</GradientButton>
+            </a>
+            <a href="#" target="_blank" rel="noreferrer">
+              <GradientButton aria-label="Resume" variant="emerald">Resume</GradientButton>
+            </a>
+          </motion.div>
 
         </div>
       </div>

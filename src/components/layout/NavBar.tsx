@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const NavBar = () => {
   return (
     <nav className="fixed top-0 inset-x-0 z-30">
-      <div className="container flex items-center justify-center py-4 will-change-transform transform-gpu">
+      <div className="container flex items-center justify-center py-4">
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}

@@ -144,18 +144,7 @@ const MyWorks = () => {
 
       <main className="container pt-16 pb-16">
         <StaggeredContent className="flex items-center justify-center mb-8">
-          <AnimatePresence mode="wait">
-            <motion.h1 
-              key={activeTab}
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 20, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="font-display text-3xl md:text-4xl"
-            >
-              {activeTab === 'works' ? 'My Works' : 'Project Works'}
-            </motion.h1>
-          </AnimatePresence>
+          <h1 className="font-display text-3xl md:text-4xl">My Works</h1>
         </StaggeredContent>
 
         {/* Animated Tab Content */}

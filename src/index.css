@@ -97,20 +97,7 @@
 @layer base {
   * { @apply border-border; }
   html, body { height: 100%; }
-  body { 
-    @apply bg-background text-foreground font-sans antialiased; 
-    background-image: var(--gradient-soft); 
-    background-attachment: fixed;
-    /* Prevent layout shifts during transitions */
-    overflow-x: hidden;
-  }
-  
-  /* Prevent navbar jerk by ensuring consistent layout */
-  nav {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
+  body { @apply bg-background text-foreground font-sans antialiased; background-image: var(--gradient-soft); background-attachment: fixed; }
 }
 
 @layer utilities {

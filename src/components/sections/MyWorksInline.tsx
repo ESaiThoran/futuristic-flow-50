@@ -184,7 +184,11 @@ const MyWorksInline = ({
             delay: contentVisible ? 0.1 : 0,
             ease: [0.25, 0.46, 0.45, 0.94] 
           }}
-          onClick={onClose}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose();
+          }}
           className="fixed top-6 left-6 z-50 px-4 py-2 rounded-lg border-2 border-white/20 bg-black/40 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 shadow-2xl"
         >
           <IoClose className="text-lg" />
